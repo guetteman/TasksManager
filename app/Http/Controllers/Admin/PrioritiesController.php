@@ -25,7 +25,9 @@ class PrioritiesController extends Controller {
         'name' => 'required|max:20',
     ]);
 
-    return $this->priority->store($request);
+    $priority = $this->priority->store($request);
+
+    return redirect('admin/priorities/'.$priority->id);
   }
 
   public function show($id){
@@ -40,9 +42,9 @@ class PrioritiesController extends Controller {
 
   public function update(Request $request, $id){
 
-    $newPriority =$this->priority->getById($id);
+    $currentPriority =$this->priority->getById($id);
 
-    if (is_null($newPriority)){
+    if (is_null($currentPriority)){
       return response()->json(['priority_not_found'], 404);
     }
 
@@ -50,7 +52,9 @@ class PrioritiesController extends Controller {
       'name'    => 'max:20',
     ]);
 
-    return $newPriority->modify($request);
+    $newPriority = $currentPriority->modify($request);
+
+    return redirect('admin/priorities/'.$newPriority->id);
   }
 
   public function destroy($id){

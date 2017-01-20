@@ -29,7 +29,9 @@ class UsersController extends Controller {
         'role' => 'required|in:user,admin'
     ]);
 
-    return $this->user->store($request);
+    $user = $this->user->store($request);
+
+    return redirect('admin/users/'.$user->id);
   }
 
   public function show($id){
@@ -44,9 +46,9 @@ class UsersController extends Controller {
 
   public function update(Request $request, $id){
 
-    $newUser =$this->user->getById($id);
+    $currentUser =$this->user->getById($id);
 
-    if (is_null($newUser)){
+    if (is_null($currentUser)){
       return response()->json(['user_not_found'], 404);
     }
 
@@ -58,7 +60,9 @@ class UsersController extends Controller {
         'role' => 'in:user,admin'
     ]);
 
-    return $newUser->modify($request);
+    $newUser = $currentUser->modify($request);
+
+    return redirect('admin/users/'.$newUser->id);
   }
 
   public function destroy($id){

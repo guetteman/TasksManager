@@ -17,7 +17,13 @@ $app->get('/', function () use ($app) {
 
 $app->post('auth/login', 'AuthController@postLogin');
 
-$app->group(['prefix' => 'admin'], function () use ($app) {
+$app->group(['prefix' => 'admin', 'middleware' => 'auth'], function () use ($app) {
+
+  $app->get('/', function () use ($app) {
+    return redirect('dashboard');
+  });
+
+  $app->get('dashboard', 'Admin\AdminController@index');
 
   $app->get('users', 'Admin\UsersController@index');
   $app->post('users', 'Admin\UsersController@store');

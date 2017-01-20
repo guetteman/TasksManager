@@ -29,7 +29,9 @@ class TasksController extends Controller {
         'due_date' => 'required|date',
     ]);
 
-    return $this->task->store($request);
+    $task = $this->task->store($request);
+
+    return redirect('admin/tasks/'.$task->id);
   }
 
   public function show($id){
@@ -44,9 +46,9 @@ class TasksController extends Controller {
 
   public function update(Request $request, $id){
 
-    $newTask =$this->task->getById($id);
+    $currentTask =$this->task->getById($id);
 
-    if (is_null($newTask)){
+    if (is_null($currentTask)){
       return response()->json(['task_not_found'], 404);
     }
 
@@ -58,7 +60,9 @@ class TasksController extends Controller {
       'due_date' => 'date',
     ]);
 
-    return $newTask->modify($request);
+    $newTask = $currentTask->modify($request);
+
+    return redirect('admin/tasks/'.$newTask->id);
   }
 
   public function destroy($id){
