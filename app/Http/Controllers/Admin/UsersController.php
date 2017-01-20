@@ -41,7 +41,12 @@ class UsersController extends Controller {
       return response()->json(['user_not_found'], 404);
     }
 
-    return $this->user->getById($id);
+    $tasks = $user->tasks()->with('priority')->get();
+
+    return response()->json([
+      'user' => $user,
+      'tasks' => $tasks
+    ]);
   }
 
   public function update(Request $request, $id){

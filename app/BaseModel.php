@@ -10,6 +10,10 @@ class BaseModel extends Model{
     return $this->find($id);
   }
 
+  public function getWith($id, array $relations){
+    return $this->with($relations)->find($id);
+  }
+
   public function erase(){
     if(!$this->delete()){
       return response()->json(['server_error'], 500);

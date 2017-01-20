@@ -35,13 +35,13 @@ class TasksController extends Controller {
   }
 
   public function show($id){
-    $task = $this->task->getById($id);
+    $task = $this->task->getWith($id, ['user', 'priority']);
 
     if (is_null($task)) {
       return response()->json(['task_not_found'], 404);
     }
 
-    return $this->task->getById($id);
+    return $task;
   }
 
   public function update(Request $request, $id){

@@ -68,6 +68,10 @@ $app->singleton(
 // ]);
 
 $app->routeMiddleware([
+    'checkAdmin' => App\Http\Middleware\CheckAdmin::class,
+]);
+
+$app->routeMiddleware([
     'auth' => Tymon\JWTAuth\Http\Middleware\Authenticate::class,
 ]);
 

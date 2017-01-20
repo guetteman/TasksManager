@@ -37,7 +37,12 @@ class PrioritiesController extends Controller {
       return response()->json(['priority_not_found'], 404);
     }
 
-    return $this->priority->getById($id);
+    $tasks = $priority->tasks()->with('user')->get();
+
+    return response()->json([
+      'priority' => $priority,
+      'tasks' => $tasks
+    ]);
   }
 
   public function update(Request $request, $id){

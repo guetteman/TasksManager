@@ -17,10 +17,10 @@ $app->get('/', function () use ($app) {
 
 $app->post('auth/login', 'AuthController@postLogin');
 
-$app->group(['prefix' => 'admin', 'middleware' => 'auth'], function () use ($app) {
+$app->group(['prefix' => 'admin', 'middleware' => ['auth', 'checkAdmin']], function () use ($app) {
 
-  $app->get('/', function () use ($app) {
-    return redirect('dashboard');
+  $app->get('/', function () {
+    return redirect('admin/dashboard');
   });
 
   $app->get('dashboard', 'Admin\AdminController@index');
