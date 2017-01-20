@@ -31,13 +31,21 @@ class User extends Model implements JWTSubject, AuthenticatableContract, Authori
         'password',
     ];
 
-    public function getJWTIdentifier()
-    {
-        return $this->getKey();
+    public function tasks() {
+
+      return $this->hasMany('App\Task');
+
     }
 
-    public function getJWTCustomClaims()
-    {
+    public function getJWTIdentifier() {
+
+        return $this->getKey();
+
+    }
+
+    public function getJWTCustomClaims() {
+
         return [];
+
     }
 }

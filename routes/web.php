@@ -15,8 +15,4 @@ $app->get('/', function () use ($app) {
     return $app->version();
 });
 
-// $app->get('/auth', function () use ($app) {
-//     return $app->version();
-// });
-
 $app->post('auth/login', 'AuthController@postLogin');
