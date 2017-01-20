@@ -67,6 +67,18 @@ $app->singleton(
 //     'auth' => App\Http\Middleware\Authenticate::class,
 // ]);
 
+$app->routeMiddleware([
+    'auth' => Tymon\JWTAuth\Http\Middleware\Authenticate::class,
+]);
+
+$app->routeMiddleware([
+    'refreshToken' => Tymon\JWTAuth\Http\Middleware\RefreshToken::class,
+]);
+
+$app->routeMiddleware([
+    'check' => Tymon\JWTAuth\Http\Middleware\Check::class,
+]);
+
 /*
 |--------------------------------------------------------------------------
 | Register Service Providers

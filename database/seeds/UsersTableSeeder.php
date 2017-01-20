@@ -17,6 +17,7 @@ class UsersTableSeeder extends Seeder
           'last_name' => 'admin',
           'email' => 'admin@gmail.com',
           'password' => app('hash')->make('admin'),
+          'role' => 'admin'
       ]);
     }
 }
