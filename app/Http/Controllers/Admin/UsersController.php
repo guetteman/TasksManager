@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -22,7 +22,7 @@ class UsersController extends Controller {
   public function store(Request $request){
 
     $this->validate($request, [
-        'email'    => 'required|email|max:255',
+        'email'    => 'required|email|max:255|unique:users,email',
         'password' => 'required|max:50',
         'first_name' => 'required|max:50',
         'last_name' => 'required|max:50',

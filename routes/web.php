@@ -18,9 +18,17 @@ $app->get('/', function () use ($app) {
 $app->post('auth/login', 'AuthController@postLogin');
 
 $app->group(['prefix' => 'admin'], function () use ($app) {
-  $app->get('users', 'UsersController@index');
-  $app->post('users', 'UsersController@store');
-  $app->get('users/{id}', 'UsersController@show');
-  $app->put('users/{id}', 'UsersController@update');
-  $app->delete('users/{id}', 'UsersController@destroy');
+
+  $app->get('users', 'Admin\UsersController@index');
+  $app->post('users', 'Admin\UsersController@store');
+  $app->get('users/{id}', 'Admin\UsersController@show');
+  $app->put('users/{id}', 'Admin\UsersController@update');
+  $app->delete('users/{id}', 'Admin\UsersController@destroy');
+
+  $app->get('tasks', 'Admin\TasksController@index');
+  $app->post('tasks', 'Admin\TasksController@store');
+  $app->get('tasks/{id}', 'Admin\TasksController@show');
+  $app->put('tasks/{id}', 'Admin\TasksController@update');
+  $app->delete('tasks/{id}', 'Admin\TasksController@destroy');
+
 });

@@ -10,4 +10,12 @@ class BaseModel extends Model{
     return $this->find($id);
   }
 
+  public function erase(){
+    if(!$this->delete()){
+      return response()->json(['server_error'], 500);
+    }
+
+    return response()->json(['delete_successful'], 200);
+  }
+
 }
