@@ -58,6 +58,9 @@ $app->singleton(
 | route or middleware that'll be assigned to some specific routes.
 |
 */
+$app->middleware([
+    Nord\Lumen\Cors\CorsMiddleware::class,
+]);
 
 // $app->middleware([
 //    App\Http\Middleware\ExampleMiddleware::class
@@ -98,6 +101,8 @@ $app->register(App\Providers\AppServiceProvider::class);
 // $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
 $app->register(\Tymon\JWTAuth\Providers\LumenServiceProvider::class);
+$app->register(Nord\Lumen\Cors\CorsServiceProvider::class);
+
 
 /*
 |--------------------------------------------------------------------------
