@@ -31,4 +31,11 @@ $app->group(['prefix' => 'admin'], function () use ($app) {
   $app->put('tasks/{id}', 'Admin\TasksController@update');
   $app->delete('tasks/{id}', 'Admin\TasksController@destroy');
 
+  $app->get('priorities', 'Admin\PrioritiesController@index');
+  $app->post('priorities', 'Admin\PrioritiesController@store');
+  $app->get('priorities/{id}', 'Admin\PrioritiesController@show');
+  $app->put('priorities/{id}', 'Admin\PrioritiesController@update');
+  $app->delete('priorities/{id}', 'Admin\PrioritiesController@destroy');
+
+
 });

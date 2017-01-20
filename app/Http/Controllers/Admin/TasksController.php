@@ -44,9 +44,9 @@ class TasksController extends Controller {
 
   public function update(Request $request, $id){
 
-    $newUser =$this->task->getById($id);
+    $newTask =$this->task->getById($id);
 
-    if (is_null($newUser)){
+    if (is_null($newTask)){
       return response()->json(['task_not_found'], 404);
     }
 
@@ -58,7 +58,7 @@ class TasksController extends Controller {
       'due_date' => 'date',
     ]);
 
-    return $newUser->modify($request);
+    return $newTask->modify($request);
   }
 
   public function destroy($id){
