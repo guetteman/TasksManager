@@ -86,6 +86,9 @@ $app->routeMiddleware([
     'check' => Tymon\JWTAuth\Http\Middleware\Check::class,
 ]);
 
+$app->routeMiddleware([
+    'checkUser' => App\Http\Middleware\CheckUser::class,
+]);
 /*
 |--------------------------------------------------------------------------
 | Register Service Providers

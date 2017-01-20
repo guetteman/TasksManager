@@ -65,7 +65,7 @@ class UsersController extends Controller {
         'role' => 'in:user,admin'
     ]);
 
-    $newUser = $currentUser->modify($request);
+    $newUser = $currentUser->modify($request->except('token'));
 
     return redirect('admin/users/'.$newUser->id);
   }

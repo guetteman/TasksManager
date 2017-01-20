@@ -45,3 +45,10 @@ $app->group(['prefix' => 'admin', 'middleware' => ['auth', 'checkAdmin']], funct
 
 
 });
+
+$app->group(['prefix' => 'dashboard', 'middleware' => ['auth','checkUser']], function () use ($app) {
+
+    $app->get('users/{id}', 'User\ProfileController@show');
+    $app->put('users/{id}', 'User\ProfileController@update');
+    $app->delete('users/{id}', 'User\ProfileController@destroy');
+});

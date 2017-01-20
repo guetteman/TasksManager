@@ -63,9 +63,8 @@ class User extends BaseModel implements JWTSubject, AuthenticatableContract, Aut
       return $this;
     }
 
-    public function modify(Request $request){
-
-      foreach ($request->except('token') as $key => $value) {
+    public function modify($request){
+      foreach ($request as $key => $value) {
         $this[$key] = $value;
       }
 

@@ -32,7 +32,7 @@ class Priority extends BaseModel{
 
   public function modify(Request $request){
 
-    foreach ($request->except('token') as $key => $value) {
+    foreach ($request->except('token','_method') as $key => $value) {
       $this[$key] = $value;
     }
 
