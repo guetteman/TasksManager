@@ -8,20 +8,31 @@ use App\Task;
 use Auth;
 
 
-class TaskController extends Controller {
+class TasksController extends Controller {
 
     protected $task;
     protected $user;
 
+    /**
+     * TasksController constructor.
+     * @param Task $task
+     */
     public function __construct(Task $task) {
         $this->user = Auth::user();
         $this->task = $task;
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
     public function index(){
         return $this->user->tasks()->get();
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function store(Request $request){
 
         $this->validate($request, [
@@ -38,9 +49,16 @@ class TaskController extends Controller {
 
         $task = $this->task->store($request);
 
-        return redirect('dashboard/tasks/' . $task->id);
+        return response()->json([
+            'created' => true,
+            'task' => $task
+        ]);
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse | \App\Task
+     */
     public function show($id){
 
         $task = $this->user->tasks()->where('id', $id)->with('priority')->first();
@@ -52,6 +70,11 @@ class TaskController extends Controller {
         return $task;
     }
 
+    /**
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function update(Request $request, $id){
 
         $currentTask = $this->user->tasks()->where('id', $id)->with('priority')->first();
@@ -74,9 +97,16 @@ class TaskController extends Controller {
 
         $newTask = $currentTask->modify($request);
 
-        return redirect('dashboard/tasks/'.$newTask->id);
+        return response()->json([
+            'updated' => true,
+            'task' => $newTask
+        ]);
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function destroy($id){
         $task = $this->user->tasks()->where('id', $id)->with('priority')->first();
 
@@ -84,7 +114,11 @@ class TaskController extends Controller {
             return response()->json(['task_not_found'], 404);
         }
 
-        return $task->erase();
+        $task->erase();
+
+        return response()->json([
+            'deleted' => true,
+        ]);
     }
 
 }

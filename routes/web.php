@@ -56,11 +56,11 @@ $app->group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () use (
         $app->delete('users/{id}', 'User\ProfileController@destroy');
     });
 
-    $app->get('tasks', 'User\TaskController@index');
-    $app->post('tasks', 'User\TaskController@store');
-    $app->get('tasks/{id}', 'User\TaskController@show');
-    $app->put('tasks/{id}', 'User\TaskController@update');
-    $app->delete('tasks/{id}', 'User\TaskController@destroy');
+    $app->get('tasks', 'User\TasksController@index');
+    $app->post('tasks', 'User\TasksController@store');
+    $app->get('tasks/{id}', 'User\TasksController@show');
+    $app->put('tasks/{id}', 'User\TasksController@update');
+    $app->delete('tasks/{id}', 'User\TasksController@destroy');
 
 });
 

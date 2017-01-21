@@ -10,14 +10,24 @@ class ProfileController extends Controller {
 
     protected $user;
 
+    /**
+     * ProfileController constructor.
+     */
     public function __construct() {
         $this->user = Auth::user();
     }
 
+    /**
+     * @return \App\User
+     */
     public function show(){
         return $this->user;
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function update(Request $request){
 
         $this->validate($request, [
@@ -28,13 +38,23 @@ class ProfileController extends Controller {
             'role' => 'in:user,admin'
         ]);
 
-        $this->user->modify($request->except('role','password','token','_method'));
+        $user = $this->user->modify($request->except('role','password','token','_method'));
 
-        return redirect('dashboard/users/'.$this->user->id);
+        return response()->json([
+            'updated' => true,
+            'user' => $user
+        ]);
     }
 
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function destroy(){
 
-        return $this->user->erase();
+        $this->user->erase();
+
+        return response()->json([
+            'deleted' => true,
+        ]);
     }
 }
