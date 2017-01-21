@@ -37,7 +37,7 @@ class UsersController extends Controller {
   public function show($id){
     $user = $this->user->getById($id);
 
-    if (is_null($user)) {
+    if ($user->isEmpty()) {
       return response()->json(['user_not_found'], 404);
     }
 
@@ -53,7 +53,7 @@ class UsersController extends Controller {
 
     $currentUser =$this->user->getById($id);
 
-    if (is_null($currentUser)){
+    if ($currentUser->isEmpty()){
       return response()->json(['user_not_found'], 404);
     }
 
@@ -73,7 +73,7 @@ class UsersController extends Controller {
   public function destroy($id){
     $user = $this->user->getById($id);
 
-    if (is_null($user)) {
+    if ($user->isEmpty()) {
       return response()->json(['user_not_found'], 404);
     }
 

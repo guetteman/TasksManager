@@ -37,7 +37,7 @@ class TasksController extends Controller {
   public function show($id){
     $task = $this->task->getWith($id, ['user', 'priority']);
 
-    if (is_null($task)) {
+    if ($task->isEmpty()) {
       return response()->json(['task_not_found'], 404);
     }
 
@@ -48,7 +48,7 @@ class TasksController extends Controller {
 
     $currentTask =$this->task->getById($id);
 
-    if (is_null($currentTask)){
+    if ($currentTask->isEmpty()){
       return response()->json(['task_not_found'], 404);
     }
 
@@ -68,7 +68,7 @@ class TasksController extends Controller {
   public function destroy($id){
     $task = $this->task->getById($id);
 
-    if (is_null($task)) {
+    if ($task->isEmpty()) {
       return response()->json(['task_not_found'], 404);
     }
 

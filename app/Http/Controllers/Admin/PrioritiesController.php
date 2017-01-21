@@ -33,7 +33,7 @@ class PrioritiesController extends Controller {
   public function show($id){
     $priority = $this->priority->getById($id);
 
-    if (is_null($priority)) {
+    if ($priority->isEmpty()) {
       return response()->json(['priority_not_found'], 404);
     }
 
@@ -49,7 +49,7 @@ class PrioritiesController extends Controller {
 
     $currentPriority =$this->priority->getById($id);
 
-    if (is_null($currentPriority)){
+    if ($currentPriority->isEmpty()){
       return response()->json(['priority_not_found'], 404);
     }
 
@@ -65,7 +65,7 @@ class PrioritiesController extends Controller {
   public function destroy($id){
     $priority = $this->priority->getById($id);
 
-    if (is_null($priority)) {
+    if ($priority->isEmpty()) {
       return response()->json(['priority_not_found'], 404);
     }
 
